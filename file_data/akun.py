@@ -1,6 +1,6 @@
 import json, os
-# from datajson import baca_data
-from file_data.datajson import baca_data
+# from datajson import baca_data_akun
+from file_data.datajson import baca_data_akun
 from pesan import *
 
 def clear():
@@ -8,7 +8,7 @@ def clear():
 
 def registrasi():
     while True:
-        data = baca_data()
+        data = baca_data_akun()
         member_akun = data["member"]
         try:
             regis_username = input("Masukkan username: ")
@@ -20,7 +20,7 @@ def registrasi():
             else:
                 id_baru = 1
 
-            if regis_username in [i["username"] for i in member_akun]:
+            if regis_username in [akun["username"] for akun in member_akun]:
                 raise ValueError("Username sudah terdaftar. Silakan coba username lain.")
             elif regis_password.strip() == "":
                 raise ValueError("Password tidak boleh kosong.")
@@ -36,8 +36,8 @@ def registrasi():
             member_akun.append(akun_baruM)
             print(member_akun[-1])
             
-            with open("file_data/data.json", "w") as file:
-                json.dump(data, file, indent = 4 )
+            with open("file_data/data_akun.json", "w") as file:
+                json.dump(data, file, indent = 4)
                 
             print("\nRegistrasi berhasil!")
             input("Tekan Enter untuk kembali...")
@@ -50,7 +50,7 @@ def registrasi():
 def login_akun():
     kesempatan = 3
     while kesempatan > 0:
-        data = baca_data()
+        data = baca_data_akun()
         akun_member = data["member"]
         akun_admin = data["admin"]
         try:
@@ -81,7 +81,7 @@ def login_akun():
                                     return None, None
                                 else:
                                     print("Input harus 'y' atau 'n'. Silakan coba lagi.")
-                                    detik3()
+                                    detik3_coba_lagi()
                                     clear()
                                     continue
                         else:
@@ -89,7 +89,7 @@ def login_akun():
                     else :
                         kesempatan -= 1
                         input("Password salah. Silakan tekan enter untuk coba lagi.")
-                        detik3()
+                        detik3_coba_lagi()
                         break
                          
         # Login akun admin
@@ -100,7 +100,7 @@ def login_akun():
                     else:
                         kesempatan -= 1
                         input("Password salah. Silakan tekan enter untuk coba lagi.")
-                        detik3()
+                        detik3_coba_lagi()
                         break
             else:            
                 print("Username tidak ditemukan. Silakan registrasi terlebih dahulu.")
