@@ -41,18 +41,47 @@ while True:
                             melihat_rute_perjalanan()
                             break
                         elif jawab_pil1["menu_pil1"][0] == "3":
+                            # NANTI AKAN DI LANJUT LAGI 
                             pass
                         elif jawab_pil1["menu_pil1"][0] == "4":
                             bersih()
                             break
-
-                    
+                        
+                elif jawab["admin_menu"][0] == "2":
+                    detik3()
+                    bersih()
+                    while True:
+                        header_menu_admin()
+                        break
+                 
+                elif jawab["admin_menu"][0] == "3":
+                    detik3()
+                    bersih()
+                    while True:
+                        header_menu_admin()
+                        jawab_pil3 = mengelola_akun_pengguna()
+                        if jawab_pil3["menu_pil3"][0] == "1":
+                            bersih()
+                            melihat_akun_pengguna()
+                        elif jawab_pil3["menu_pil3"][0] == "2":
+                            bersih()
+                            ban_akun_pengguna()
+                        elif jawab_pil3["menu_pil3"][0] == "3":
+                            bersih()
+                        elif jawab_pil3["menu_pil3"][0] == "4":
+                            bersih()
+                            break
+                
+                elif jawab["admin_menu"][0] == "4":
+                    bersih()
+                    break
+                      
         elif role == "member":
             print(f"Selamat datang Member (ID: {id_akun})!")
             
     elif jawab["list_login"] == "Registrasi":
-        registrasi()  #<-- Ada di akun.py
-    
+        registrasi()  
+        bersih()
     elif jawab["list_login"] == "Keluar":
         print("Terima kasih telah menggunakan aplikasi ini. Sampai jumpa!")
         break

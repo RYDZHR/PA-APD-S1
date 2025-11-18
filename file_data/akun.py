@@ -13,13 +13,6 @@ def registrasi():
         try:
             regis_username = input("Masukkan username: ")
             regis_password = input("Masukkan password: ")
-            banyak_akun = len(member_akun)
-            if banyak_akun > 0:
-                id_akhir = int(member_akun[-1]["id"])
-                id_baru = id_akhir + 1
-            else:
-                id_baru = 1
-
             if regis_username in [akun["username"] for akun in member_akun]:
                 raise ValueError("Username sudah terdaftar. Silakan coba username lain.")
             elif regis_password.strip() == "":
@@ -27,6 +20,15 @@ def registrasi():
             elif regis_username.strip() == "":
                 raise ValueError("Username tidak boleh kosong.")
             
+            cek_id = sorted([int(akun["id"]) for akun in member_akun])
+            id_awal = 1
+            for uid in cek_id:
+                if uid == id_awal:
+                    id_awal += 1
+                else:
+                    break
+                
+            id_baru = id_awal
             akun_baruM = {
                 "id": str(id_baru),
                 "username": regis_username,
@@ -34,7 +36,6 @@ def registrasi():
                 "status": "aktif"
             }
             member_akun.append(akun_baruM)
-            print(member_akun[-1])
             
             with open("file_data/data_akun.json", "w") as file:
                 json.dump(data, file, indent = 4)
@@ -103,7 +104,7 @@ def login_akun():
                         detik3_coba_lagi()
                         break
             else:            
-                print("Username tidak ditemukan. Silakan registrasi terlebih dahulu.")
+                print("Username tidak ditemukan/Sudah Dihapus!!\nSilakan registrasi terlebih dahulu.")
                 detik5()
                 return None, None
             

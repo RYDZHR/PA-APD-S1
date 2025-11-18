@@ -8,7 +8,7 @@ def menu_admin():
                       message = "Pilih Salah Satu Menu Yang Tersedia",
                       choices = [
                           "1. Mengelola Data Rute Perjalanan",
-                          "2. Mengelola Laporan dan Review Pengguna",
+                          "2. Mengelola Laporan dan Review Pengguna Mengenai Perjalanan",
                           "3. Mengelola Akun Pengguna",
                           "4. Logout"
                       ]
@@ -26,10 +26,25 @@ def mengelola_rute_perjalanan():
                         "1. Membuat Rute Perjalanan Baru",
                         "2. Melihat Semua Rute Perjalanan",
                         "3. Menghapus Rute Perjalanan",
-                        "4. Keluar"
+                        "4. Keluar Dari Menu Ini"
                         ]
                       )
         ]
     jawab_pil1 = inquirer.prompt(menu_awal)
     return jawab_pil1
     
+    
+def mengelola_akun_pengguna():
+    menu_awal = [
+        inquirer.List("menu_pil3",
+                      message = "Pilih Salah Satu Menu Yang Tersedia",
+                      choices = [
+                          "1. Melihat Seluruh Akun Pengguna dan Menghapus Akun Pengguna",
+                          "2. Mem-Banned Akun Pengguna",
+                          "3. Menangani Laporan Pengguna Mengenai Akun",
+                          "4. Keluar Dari Menu Ini"
+                      ]
+                    )  
+    ]
+    jawab_pil3 = inquirer.prompt(menu_awal)
+    return jawab_pil3

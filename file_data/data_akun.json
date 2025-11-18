@@ -18,9 +18,27 @@
     ],
     "member": [
         {
+            "id": "2",
+            "username": "akun1",
+            "password": "2",
+            "status": "aktif"
+        },
+        {
             "id": "1",
             "username": "test",
-            "password": "1",
+            "password": "3",
+            "status": "aktif"
+        },
+        {
+            "id": "4",
+            "username": "a",
+            "password": "b",
+            "status": "aktif"
+        },
+        {
+            "id": "5",
+            "username": "v",
+            "password": "v",
             "status": "BANNED"
         }
     ]
