@@ -18,10 +18,10 @@ while True:
     jawab = inquirer_login() #<-- Ada di list_inquirer.py
     print("="*60)
     if jawab["list_login"] == "Login":
-        role, id_akun = login_akun() #<-- Ada di akun.py
+        role, username = login_akun() #<-- Ada di akun.py
         bersih()
         if role == "admin":
-            tampilan_menu_admin(id_akun)
+            tampilan_menu_admin(username)
             bersih()
             while True:
                 header_menu_admin()
@@ -68,6 +68,7 @@ while True:
                             ban_akun_pengguna()
                         elif jawab_pil3["menu_pil3"][0] == "3":
                             bersih()
+                            menangani_laporan_akun()
                         elif jawab_pil3["menu_pil3"][0] == "4":
                             bersih()
                             break
@@ -77,7 +78,7 @@ while True:
                     break
                       
         elif role == "member":
-            print(f"Selamat datang Member (ID: {id_akun})!")
+            print(f"Selamat datang Member (Username: {username})!")
             
     elif jawab["list_login"] == "Registrasi":
         registrasi()  

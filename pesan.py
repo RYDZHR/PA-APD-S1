@@ -9,10 +9,10 @@ def teks_mulai():
     print("=" * 60)
 
 
-def tampilan_menu_admin(id_akun):
+def tampilan_menu_admin(username):
     print("="*50) 
     print("👑 Selamat Datang, Admin! 👑") 
-    print(f"ID Akun: {id_akun}") 
+    print(f"Username Akun: {username}") 
     print(f"Login Berhasil: {time.strftime("%d %B %Y %H:%M:%S")}") 
     print("="*50) 
     loading()

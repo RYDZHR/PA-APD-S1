@@ -1,6 +1,6 @@
 import json, os
 # from datajson import baca_data_akun
-from file_data.datajson import baca_data_akun
+from file_data.datajson import *
 from pesan import *
 
 def clear():
@@ -33,7 +33,7 @@ def registrasi():
                 "id": str(id_baru),
                 "username": regis_username,
                 "password": regis_password,
-                "status": "aktif"
+                "status": "Aktif"
             }
             member_akun.append(akun_baruM)
             
@@ -52,8 +52,10 @@ def login_akun():
     kesempatan = 3
     while kesempatan > 0:
         data = baca_data_akun()
+        data_laporan = baca_data_laporan()
         akun_member = data["member"]
         akun_admin = data["admin"]
+        laporan = data_laporan["laporan_akun"]
         try:
             username_input = input("Masukkan username: ").strip()
             password_input = input("Masukkan password: ").strip()
@@ -72,21 +74,57 @@ def login_akun():
                             while True:
                                 tanya = input("Apakah anda ingin menghubungi admin sekarang? (y/n): ")
                                 if tanya.lower() == 'y':
-                                    print("Menghubungi admin...")
-                                    detik5()
-                                    return None, None
-                                # LANJUTKAN INI BIAR USER BISA HUBUNGI ADMIN
+                                    clear()
+                                    laporan_aktif = next((lap for lap in laporan if lap["id"] == member["id"]), None)
+                                    if laporan_aktif:
+                                        print("Anda Sudah Mengirim Laporan Ke Admin. Silakan Tunggu Admin Menangani Laporan Anda...")
+                                        detik5()
+                                        return None, None
+                                    
+                                    pesan = input("Masukan Keluhan Anda: ").strip()
+                                    if pesan == "":
+                                        print("Pesan Kosong, Gagal Membuat Laporan!!")
+                                        detik5()
+                                        return None, None
+                                    else:
+                                        laporan_member = {
+                                            "id": member["id"],
+                                            "username": member["username"],
+                                            "status": member["status"],
+                                            "pesan": pesan
+                                        }
+                                        laporan.append(laporan_member)
+                                        with open("file_data/data_laporan.json", "w") as file:
+                                            json.dump(data_laporan, file, indent = 4 )
+                                            
+                                        print("Menghubungi admin...")
+                                        detik5()
+                                        print("\nBerhasil Terhubung Dengan Admin, Silahkan Tunggu Respon Admin Tentang Akun Anda")
+                                        input("Tekan Enter Untuk Kembali Ke Menu Utama...")
+                                        clear()
+                                        return None, None
+                                
                                 elif tanya.lower() == 'n':
-                                    print("Kembali ke menu utama...")
+                                    print("\nSilahkan Hubungi Admin Kembali Jika Anda Berubah Pikiran...")
                                     detik5()
                                     return None, None
                                 else:
-                                    print("Input harus 'y' atau 'n'. Silakan coba lagi.")
+                                    print("\nInput harus 'y' atau 'n'. Silakan coba lagi.")
                                     detik3_coba_lagi()
                                     clear()
                                     continue
+                                
+                        elif member["status"] == "BLOKIR":
+                            clear()
+                            print("Akun Anda Telah Diblokir Permanen Oleh Atmin\nSilahkan Buat Akun Baru Dimenu Registrasi...")
+                            input("Tekan Enter Untuk Kembali Ke Menu Utama...")
+                            detik5()
+                            clear()
+                            return None, None
+                        
                         else:
-                            return "member", member["id"]
+                            return "member", member["username"]
+                        
                     else :
                         kesempatan -= 1
                         input("Password salah. Silakan tekan enter untuk coba lagi.")
@@ -97,7 +135,7 @@ def login_akun():
             for admin in akun_admin:
                 if username_input == admin["username"]:
                     if password_input == admin["password"]:
-                        return "admin", admin["id"]
+                        return "admin", admin["username"]
                     else:
                         kesempatan -= 1
                         input("Password salah. Silakan tekan enter untuk coba lagi.")
@@ -107,7 +145,7 @@ def login_akun():
                 print("Username tidak ditemukan/Sudah Dihapus!!\nSilakan registrasi terlebih dahulu.")
                 detik5()
                 return None, None
-            
+                
         except ValueError as e:
             print(e)
             return None, None

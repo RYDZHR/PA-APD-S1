@@ -4,7 +4,9 @@ from file_data.datajson import *
 from pesan import *
 
 import os
-
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+    
 def membuat_rute_perjalanan():
     data = baca_data_perjalanan()
     kota_1 = kota_awal()
@@ -16,7 +18,7 @@ def membuat_rute_perjalanan():
         print(f"\nSemua kota tujuan untuk kota {kota_1} sudah dibuat.")
         print("Tidak ada rute baru yang bisa dibuat dari kota ini.\n")
         input("Tekan Enter Untuk Kembali Ke Menu Mengelola Rute Perjalnan...")
-        os.system("cls" if os.name == "nt" else "clear")
+        clear()
         return
 
     kota_2 = kota_tujuan(kota_1, list_kota = rute_sudah_ada)
@@ -48,7 +50,7 @@ def membuat_rute_perjalanan():
             print(f"\nRute Yang Sama Ditemukan ({rute_kebalikan}).")
             print(f"Jarak Otomatis Digunakan: {jarak_tempuh} km\n")
             input("Tekan Enter Untuk Kembali Ke Menu Mengelola Rute Perjalanan...")
-            os.system("cls" if os.name == "nt" else "clear")
+            clear()
             break
         
         else:
@@ -59,7 +61,7 @@ def membuat_rute_perjalanan():
                 if jarak_tempuh <1:
                     print("Jarak Tidak Boleh Minus dan NOL!!")
                     input("Tekan Enter Untuk Menginput Ulang...")
-                    os.system("cls" if os.name == "nt" else "clear")
+                    clear()
                     continue
                     
                 rute_baru = {
@@ -76,24 +78,24 @@ def membuat_rute_perjalanan():
                     ulang = input("Apakah Anda Ingin Membuat Rute Baru Lagi? (Y/N)").strip()
                     if ulang.lower() == "y":
                         detik5() 
-                        os.system("cls" if os.name == "nt" else "clear")
+                        clear()
                         return membuat_rute_perjalanan()
                     elif ulang.lower() == "n":
                         print("\nKembali Ke Menu Mengelola Rute Perjalanan")
                         detik5() 
-                        os.system("cls" if os.name == "nt" else "clear")
+                        clear()
                         return
                     else:
                         print("\nMasukan Input Sesuai Intruksi Yang Diberikan!!")
                         detik5()
-                        os.system("cls" if os.name == "nt" else "clear")
+                        clear()
                         continue
                         
                         
             except ValueError:
                 print("Input jarak tempuh tidak valid. Harap masukkan angka saja.")
                 input("Tekan Enter Untuk Menginput Ulang")
-                os.system("cls" if os.name == "nt" else "clear")
+                clear()
                 continue
                 
  
@@ -115,7 +117,7 @@ def melihat_rute_perjalanan():
         
     print(table)
     input("Tekan Enter Untuk Kembali Ke Menu Mengelola Rute Perjalanan")
-    os.system("cls" if os.name == "nt" else "clear")
+    clear()
     
     
 def melihat_akun_pengguna(konfirmasi_awal = False):
@@ -126,7 +128,7 @@ def melihat_akun_pengguna(konfirmasi_awal = False):
         print("Tidak Ada Akun Pengguna Yang Terdeteksi!!")  
         input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
         detik3()
-        os.system("cls" if os.name == "nt" else "clear")  
+        clear()  
                 
     table = PrettyTable()
     table.field_names = ["ID Akun", "Username Akun", "Passowrd Akun", "Status Akun"]
@@ -139,27 +141,27 @@ def melihat_akun_pengguna(konfirmasi_awal = False):
         if pilihan == "n":
             print("\nKembali Ke Menu Mengelola Akun Pengguna...")
             detik3()
-            os.system("cls" if os.name == "nt" else "clear") 
+            clear() 
             
         elif pilihan == "y":
             if len(akun) < 1:
                 print("Semua Akun Pengguna Sudah Dihapus!!")  
                 input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
                 detik3()
-                os.system("cls" if os.name == "nt" else "clear")  
+                clear()  
                 
             while True:
-                os.system("cls" if os.name == "nt" else "clear")  
+                clear()  
                 print(table)
                 akun_hapus = input("Masukan ID Akun Yang Ingin Anda BAN: ").strip()
                 try:
                     akun_hapus = int(akun_hapus)
-                    akun_dihapus = next((x for x in akun if int(x["id"]) == akun_hapus), None)
+                    akun_dihapus = next((i for i in akun if int(i["id"]) == akun_hapus), None)
 
                     if akun_dihapus is None:
                         print("\nID tidak ditemukan!")
                         input("Tekan Enter untuk ulangi...")
-                        os.system("cls" if os.name == "nt" else "clear")
+                        clear()
                         continue
                     
                     else:
@@ -181,33 +183,33 @@ def melihat_akun_pengguna(konfirmasi_awal = False):
                                     elif pilihan == "n":
                                         print("Kembali Ke Menu Mengelola Akun Pengguna...")
                                         detik3()
-                                        os.system("cls" if os.name == "nt" else "clear")
+                                        clear()
                                         return
                                     else:
                                         print("\nMasukkan pilihan Y atau N!")
                                         input("Tekan Enter Untuk Menginput Ulang...")
-                                        os.system("cls" if os.name == "nt" else "clear")
+                                        clear()
                                         continue  
 
                             elif konfirmasi == "n":
                                 print("\nPenghapusan dibatalkan.")
                                 input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
-                                os.system("cls" if os.name == "nt" else "clear")
+                                clear()
                                 return
 
                             else:
                                 print("\nMasukkan pilihan Y atau N!")
                                 input("Tekan Enter Untuk Menginput Ulang...")
-                                os.system("cls" if os.name == "nt" else "clear")
+                                clear()
                                 continue
                 
                 except ValueError:
                     print("\nInput Tidak Valid!! ID Harus Berupa Angka!!")
                     input("Tekan Enter Untuk Menginput Ulang...")
                     detik3()
-                    os.system("cls" if os.name == "nt" else "clear")
+                    clear()
                     continue
-                    
+                     
 
 def ban_akun_pengguna():
     data = baca_data_akun()
@@ -217,53 +219,152 @@ def ban_akun_pengguna():
     if len(akun) < 1:
         print("Belum Ada Akun Pengguna Yang Dibuat")  
         input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
-        os.system("cls" if os.name == "nt" else "clear")  
-    
-    table.field_names = ["ID Akun", "Username Akun", "Passowrd Akun", "Status Akun"]
-    for data_akun in akun:
-        table.add_row([data_akun["id"], data_akun["username"], data_akun["password"], data_akun["status"]])
-        
-    while True:
-        print(table)
-        akun_ban = input("Masukan ID Akun Yang Ingin Anda BAN: ").strip()
-        try:
-            akun_ban = int(akun_ban)
-            akun_diban = next((x for x in akun if int(x["id"]) == akun_ban), None)
-            if akun_diban is None:
-                print("\nID tidak ditemukan!")
-                input("Tekan Enter untuk ulangi...")
-                os.system("cls" if os.name == "nt" else "clear")
-                continue
+        clear()  
+    else:
+        table.field_names = ["ID Akun", "Username Akun", "Passowrd Akun", "Status Akun"]
+        for data_akun in akun:
+            table.add_row([data_akun["id"], data_akun["username"], data_akun["password"], data_akun["status"]])
             
-            else:
-               while True:
-                konfirmasi = input(f"Apakah Anda Yakin Ingin Menghapus Akun {akun_diban["username"]}? (Y/N)").strip().lower()
-                if konfirmasi == "y":
-                    akun_diban["status"] = "BANNED"
-                    
-                    with open("file_data/data_akun.json", "w") as file:
-                        json.dump(data, file, indent = 4)
-                        
-                    print(f"\nAkun Dengan Username {akun_diban["username"]} Berhasil Di BAN!!")
-                    input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
-                    os.system("cls" if os.name == "nt" else "clear")  
-                    return 
-
-                elif konfirmasi == "n":
-                    print("\nBAN dibatalkan.")
-                    input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
-                    os.system("cls" if os.name == "nt" else "clear")
-                    return
-
-                else:
-                    print("\nMasukkan pilihan Y atau N!")
-                    input("Tekan Enter Untuk Menginput Ulang...")
-                    os.system("cls" if os.name == "nt" else "clear")
+        while True:
+            print(table)
+            akun_ban = input("Masukan ID Akun Yang Ingin Anda BAN: ").strip()
+            try:
+                akun_ban = int(akun_ban)
+                akun_diban = next((i for i in akun if int(i["id"]) == akun_ban), None)
+                if akun_diban is None:
+                    print("\nID tidak ditemukan!")
+                    input("Tekan Enter untuk ulangi...")
+                    clear()
                     continue
+                
+                else:
+                    while True:
+                        konfirmasi = input(f"Apakah Anda Yakin Ingin Menge-BAN Akun {akun_diban["username"]}? (Y/N)").strip().lower()
+                        if konfirmasi == "y":
+                            akun_diban["status"] = "BANNED"
+                            
+                            with open("file_data/data_akun.json", "w") as file:
+                                json.dump(data, file, indent = 4)
+                                
+                            print(f"\nAkun Dengan Username {akun_diban["username"]} Berhasil Di BAN!!")
+                            input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
+                            clear()  
+                            return 
+
+                        elif konfirmasi == "n":
+                            print("\nBAN dibatalkan.")
+                            input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
+                            clear()
+                            return
+
+                        else:
+                            print("\nMasukkan pilihan Y atau N!")
+                            input("Tekan Enter Untuk Menginput Ulang...")
+                            clear()
+                            continue
+                
+            except ValueError:
+                print("\nInput Tidak Valid!! ID Harus Berupa Angka!!")
+                input("Tekan Enter Untuk Menginput Ulang...")
+                detik3()
+                clear()
+                continue
         
-        except ValueError:
-            print("\nInput Tidak Valid!! ID Harus Berupa Angka!!")
-            input("Tekan Enter Untuk Menginput Ulang...")
-            detik3()
-            os.system("cls" if os.name == "nt" else "clear")
-            continue
+        
+def menangani_laporan_akun(): 
+    data = baca_data_akun()
+    data_laporan_akun = baca_data_laporan()
+    data_akun = data["member"]
+    laporan_akun = data_laporan_akun["laporan_akun"]
+    tabel = PrettyTable()
+    tabel.field_names = ["ID", "Username Akun", "Status Akun", "Masalah Akun"] 
+    for laporan in laporan_akun:
+        tabel.add_row([laporan["id"], laporan["username"], laporan["status"], laporan["pesan"]])
+    
+    if len(laporan_akun) < 1:
+        print("Belum Ada Laporan Tentang Akun Pengguna Yang Diterima!!")
+        input("Silahkan Tekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
+        clear()
+        
+    else:
+        while True:
+            print(tabel)
+            pilihan = input("Masukan ID Akun: ").strip()
+            try:
+                pilihan = int(pilihan)
+                pilih_laporan = next((i for i in laporan_akun if int(i["id"]) == pilihan), None)
+                pilih_akun = next((i for i in data_akun if int(i["id"]) == pilihan), None)
+                
+                if pilih_laporan is None:
+                    print("\nID tidak ditemukan!")
+                    input("Tekan Enter untuk ulangi...")
+                    clear()
+                    continue
+                
+                else:
+                    while True:
+                        konfirmasi = input(f"Apakah Anda Ingin Menangani Akun dengan Username:{pilih_laporan["username"]} ? (Y/N)").strip().lower()
+                        if konfirmasi == "y":
+                            pilih_akun["status"] = "Aktif"
+                            index = laporan_akun.index(pilih_laporan)
+                            laporan_akun.pop(index)
+                            
+                            with open("file_data/data_akun.json", "w") as file:
+                                json.dump(data, file, indent = 4)
+                            with open("file_data/data_laporan.json", "w") as file:
+                                json.dump(data_laporan_akun, file, indent = 4)
+                                
+                            print("Akun Berhasil Ditangani!!")
+                            input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
+                            detik3()
+                            clear()
+                            return
+                         
+                        elif konfirmasi == "n":
+                            clear()
+                            print("Jika Tidak Menangani Akun Ini, Maka Akun Akan Otomatis Terblokir!!")
+                            konfirmasi_akhir = input(f"\nApakah Anda Yakin Tidak Ingin Menangani Akun dengan Username:{pilih_laporan["username"]} ? (Y/N)").strip().lower() 
+                            if konfirmasi_akhir == "y":
+                                pilih_akun["status"] = "BLOKIR"
+                                index = laporan_akun.index(pilih_laporan)
+                                laporan_akun.pop(index)
+                                
+                                with open("file_data/data_akun.json", "w") as file:
+                                    json.dump(data, file, indent = 4)
+                                with open("file_data/data_laporan.json", "w") as file:
+                                    json.dump(data_laporan_akun, file, indent = 4)
+                                    
+                                print("Akun Resmi Terblokir!!")
+                                input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
+                                detik3()
+                                clear()
+                                return 
+                            
+                            elif konfirmasi_akhir == "n":
+                                print("Akun Belum Ditangani, Pikirkan Lagi Baik-baik...")
+                                input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Akun Pengguna...")
+                                detik3()
+                                clear()
+                                return 
+                            
+                            else:
+                                print("\nMasukkan pilihan Y atau N!")
+                                input("Tekan Enter Untuk Menginput Ulang...")
+                                clear()
+                                continue 
+                            
+                        else:
+                            print("\nMasukkan pilihan Y atau N!")
+                            input("Tekan Enter Untuk Menginput Ulang...")
+                            clear()
+                            continue 
+                        
+            except ValueError:
+                print("\nInput Tidak Valid!! ID Harus Berupa Angka!!")
+                input("Tekan Enter Untuk Menginput Ulang...")
+                detik3()
+                clear()
+                continue          
+
+        
+    
