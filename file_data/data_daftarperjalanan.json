@@ -1,11 +1,14 @@
 {
-    "Nama": ["Mutia"], 
-    "Nama Perjalanan": ["Liburan ke Balikpapan"], 
-    "Destinasi": ["Balikpapan"], 
-    "Tanggal": ["1 Januari 2025"], 
-    "Durasi": ["5 hari"], 
-    "Budget": ["5000000"], 
-    "Cerita": ["Seru banget"],
-    "Rating": ["5"] 
+    "daftar_perjalanan" :
+        {
+        "Nama":"Mutia", 
+        "Nama Perjalanan":"Liburan ke Balikpapan", 
+        "Destinasi":"Balikpapan", 
+        "Tanggal":"1 Januari 2025", 
+        "Durasi":"5 hari", 
+        "Budget":"5000000", 
+        "Cerita":"Seru banget",
+        "Rating":"5" 
+        }
 }
    

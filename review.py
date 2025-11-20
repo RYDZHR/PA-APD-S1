@@ -1,6 +1,5 @@
 import os
 import inquirer
-from menu_login import Menu_utama
 from create_review import catat
 from read_review import daftar
 from update_review import update
@@ -10,7 +9,7 @@ def review() -> None:
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         print("=" * 60)
-        print(f"User: {user_login}")
+        print(f"User: {login_akun}")
         print("=" * 60)
         
         pertanyaan = [
