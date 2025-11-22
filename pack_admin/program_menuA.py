@@ -58,8 +58,8 @@ def membuat_rute_perjalanan():
             try:
                 jarak_tempuh = float(jarak_tempuh)
                 
-                if jarak_tempuh <1:
-                    print("Jarak Tidak Boleh Minus dan NOL!!")
+                if jarak_tempuh <100:
+                    print("Jarak Tidak Boleh Kurang Dari 100km")
                     input("Tekan Enter Untuk Menginput Ulang...")
                     clear()
                     continue
@@ -118,7 +118,11 @@ def melihat_rute_perjalanan():
     print(table)
     input("Tekan Enter Untuk Kembali Ke Menu Mengelola Rute Perjalanan")
     clear()
-    
+
+
+def menghapus_rute_perjalanan(): ########
+    pass    
+   
     
 def melihat_akun_pengguna(konfirmasi_awal = False):
     data = baca_data_akun()

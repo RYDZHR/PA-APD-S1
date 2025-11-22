@@ -1,3 +1,5 @@
+from file_data.datajson import *
+
 def catat() -> None:
     import os
     import inquirer

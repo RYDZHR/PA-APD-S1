@@ -11,7 +11,7 @@ def teks_mulai():
 
 def tampilan_menu_admin(username):
     print("="*50) 
-    print(" Selamat Datang, Admin! ") 
+    print("👑 Selamat Datang, Admin! 👑") 
     print(f"Username Akun: {username}") 
     print(f"Login Berhasil: {time.strftime("%d %B %Y %H:%M:%S")}") 
     print("="*50) 
@@ -19,7 +19,7 @@ def tampilan_menu_admin(username):
     
 def header_menu_admin():
     print("="*46) 
-    print("\t Ini Menu Admin! ")
+    print("\t👑 Ini Menu Admin! 👑")
     print(" Silahkan Pilih Salah Satu Menu Yang Tersedia") 
     print("="*46) 
     
@@ -27,7 +27,7 @@ def header_menu_admin():
 
 def tampilan_menu_member(username):
     print("="*50) 
-    print(f" Selamat Datang, {username}! ") 
+    print(f"🧢 Selamat Datang, {username}! 🧢") 
     print(f"Username Akun: {username}") 
     print(f"Login Berhasil: {time.strftime("%d %B %Y %H:%M:%S")}") 
     print("="*50) 
@@ -35,7 +35,7 @@ def tampilan_menu_member(username):
     
 def header_menu_member():
     print("="*46) 
-    print("\t Ini Menu Member! ")
+    print("\t🧢 Ini Menu Member! 🧢")
     print(" Silahkan Pilih Salah Satu Menu Yang Tersedia") 
     print("="*46) 
     
@@ -74,4 +74,18 @@ def loading():
         sys.stdout.flush()
         time.sleep(0.05)
     print()
+    
+    
+def loading_waktu(waktu_menit):
+    for sisa in range(waktu_menit, -1, -5):
+        bar = "█" * (waktu_menit - sisa)
+        bar += "░" * sisa
+
+        print(f"\rWaktu Tersisa: {sisa} Menit |{bar}|", end = "\r")
+        sys.stdout.flush()
+        time.sleep(0.5)
+
+    print("\nPerjalanan selesai!\n")
+    
+
     

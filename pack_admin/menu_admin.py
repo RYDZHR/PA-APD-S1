@@ -35,19 +35,7 @@ def mengelola_rute_perjalanan():
     
     
 def mengelola_laporan_review():
-    menu_awal = [
-        inquirer.List("menu_pil2",
-                      message = "Pilih Salah Satu Menu Yang Tersedia...",
-                      choices = [
-                          "1. Melihat Semua Laporan dan Review Pengguna Mengenai Perjalanan",
-                          "2. Menangani Laporan dan Review Pengguna Mengenai Perjalanan",
-                          "3. Keluar Dari Menu Ini"
-                      ]
-                    )  
-    ]
-    jawab_pil2 = inquirer.prompt(menu_awal)
-    return jawab_pil2
-    
+    pass
 
 def mengelola_akun_pengguna():
     menu_awal = [
