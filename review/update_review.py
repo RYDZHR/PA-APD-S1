@@ -1,4 +1,5 @@
 from prettytable import PrettyTable
+from datetime import datetime
 import os, json
 from file_data.datajson import *
 
@@ -73,10 +74,14 @@ def update(username):
             if destinasi_baru:
                 r["Destinasi"] = destinasi_baru
 
-            tanggal_baru = input(f"Tanggal Pergi [{tanggal_sekarang}]: ").strip()
+            tanggal_baru = input(f"Tanggal Pergi [{r['Tanggal']}] (DD/MM/YYYY): ").strip()
             if tanggal_baru:
+                try:
+                    datetime.strptime(tanggal_baru, "%d/%m/%Y")
+                except ValueError:
+                    raise ValueError("Format tanggal salah! Gunakan format DD/MM/YYYY.")
                 r["Tanggal"] = tanggal_baru
-
+                
             durasi_baru = input(f"Durasi [{durasi_sekarang}]: ").strip()
             if durasi_baru:
                 r["Durasi"] = durasi_baru
