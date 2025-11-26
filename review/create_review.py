@@ -1,5 +1,5 @@
 import os
-import inquirer
+import inquirer, json
 from file_data.datajson import *
 
 def catat(username): 
@@ -34,7 +34,7 @@ def catat(username):
 
             tambah_review ={
                 "Nama": username,
-                "Nama Perjalanan": nama_perjalanan,
+                "Nama_Perjalanan": nama_perjalanan,
                 "Destinasi": destinasi,
                 "Tanggal": tanggal,
                 "Durasi": durasi,
@@ -48,6 +48,7 @@ def catat(username):
                 print("\nReview berhasil ditambahkan!")
                 input("\nTekan Enter untuk kembali...")
                 os.system('cls' if os.name == 'nt' else 'clear')
+                return
 
         except ValueError as e:
             print(e)

@@ -6,7 +6,7 @@ from review.update_review import update
 from review.delate_review import hapus
 
 
-def review(username):
+def menu_review(username):
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         print("=" * 60)
@@ -29,12 +29,17 @@ def review(username):
         jawaban = inquirer.prompt(pertanyaan)
 
         if jawaban['menu'][0] == '1':
-            daftar()
+            os.system('cls' if os.name == 'nt' else 'clear')
+            daftar(username)
         elif jawaban['menu'][0] == '2':
-            catat()
+            os.system('cls' if os.name == 'nt' else 'clear')
+            catat(username)
         elif jawaban['menu'][0] == '3':
-            update()
+            os.system('cls' if os.name == 'nt' else 'clear')
+            update(username)
         elif jawaban['menu'][0] == '4':
-            hapus()
+            os.system('cls' if os.name == 'nt' else 'clear')
+            hapus(username)
         elif jawaban['menu'][0] == '5':
-            pass
+            os.system('cls' if os.name == 'nt' else 'clear')
+            return

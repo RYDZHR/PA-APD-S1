@@ -3,7 +3,7 @@ from file_data.datajson import *
 from pack_admin.daftar_kota import *
 from pack_member.program_rute import *
 from file_data.akun import *
-from review.review_rute import review
+from review.review_rute import menu_review
 
 kecepatan_kendaraan = {
     "Motor": 60,
@@ -91,8 +91,8 @@ def jalan_jalan(username):
 
     pertanyaan = [
             inquirer.List('menu',
-                         message="Apakah anda ingin memberikan review/laporan untuk kota ini?",
-                         choices=[
+                         message = "Apakah anda ingin memberikan review/laporan untuk kota ini?",
+                         choices = [
                             'Ya',
                             'Tidak'
                          ],
@@ -112,12 +112,13 @@ def jalan_jalan(username):
                             ),
             ]
         jawaban_pertanyaan = inquirer.prompt(pertanyaan)
-        if jawaban_pertanyaan['menu'][0] == '1':
-            review(username)
-        elif jawaban_pertanyaan['menu'][0] == '2':
-            pass
-        elif jawaban_pertanyaan['menu'][0] == '3':
-            pass
+        while True:
+            if jawaban_pertanyaan['menu'][0] == '1':
+                menu_review(username)
+            elif jawaban_pertanyaan['menu'][0] == '2':
+                pass
+            elif jawaban_pertanyaan['menu'][0] == '3':
+                return
 
     clear()
     
