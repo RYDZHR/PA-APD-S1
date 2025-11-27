@@ -99,93 +99,127 @@ def membuat_rute_perjalanan():
                 clear()
                 continue
                 
- 
-def melihat_rute_perjalanan():  
-    data = baca_data_perjalanan()
-    table = PrettyTable()
-    table.field_names = ["Kota Asal", "Rute", "Jarak Tempuh (km)", "Status"]
-    for kota_asal, list_rute in data.items():
-        if list_rute:
-           tampilkan_pertama_kali = True
-           for info_rute in list_rute:
-               if tampilkan_pertama_kali:
-                   table.add_row([kota_asal, info_rute["rute"], info_rute["jarak_tempuh"], info_rute["status"]])
-                   tampilkan_pertama_kali = False
-               else:
-                   table.add_row(["", info_rute["rute"], info_rute["jarak_tempuh"], info_rute["status"]])
+def melihat_rute_perjalanan():
+    data_perjalanan = baca_data_perjalanan()
+    
+    clear()
+    print("=" * 60)
+    print("\t\tDAFTAR RUTE PERJALANAN")
+    print("=" * 60)
+
+    if len(data_perjalanan.keys()) < 1:
+        print("Belum Ada Data Rute Perjalanan!")
+        input("Tekan Enter untuk kembali...")
+        clear()
+        return
+
+    for kota, daftar in data_perjalanan.items():
+        print(f"\nKota: {kota}")
+        if len(daftar) == 0:
+            print("   (Tidak ada rute)")
         else:
-            table.add_row([kota_asal, "-", "-", "-"])
-        
-    print(table)
-    input("Tekan Enter Untuk Kembali Ke Menu Mengelola Rute Perjalanan")
+            for idx, r in enumerate(daftar):
+                print(f"   {idx+1}. {r['rute']} | {r['jarak_tempuh']} km | Status: {r['status']}")
+
+    input("\nTekan Enter untuk kembali...")
     clear()
 
-
 def menghapus_rute_perjalanan():
-    data = baca_data_perjalanan()          
-    rute = data["rute_perjalanan"]   
+    data_perjalanan = baca_data_perjalanan()
+    data_laporan = baca_data_laporan()
 
-    if len(rute) < 1:
-        print("Belum Ada Rute Perjalanan Yang Tersedia!!")
-        input("Silahkan Tekan Enter Untuk Kembali Ke Menu Mengelola Rute...")
+    review_list = data_laporan["review_rute"]
+
+    if len(data_perjalanan.keys()) < 1:
+        print("Belum Ada Data Rute Perjalanan!")
+        input("Tekan Enter untuk kembali...")
         clear()
         return
 
     while True:
-        print("=== DAFTAR RUTE PERJALANAN ===")
-        for r in rute:
-            print(f"ID: {r['id']} | Dari: {r['dari']} | Ke: {r['ke']} | Waktu: {r['waktu']} | Harga: {r['harga']}")
+        clear()
+        print("=" * 60)
+        print("\t\tMENGHAPUS RUTE PERJALANAN")
+        print("=" * 60)
 
-        pilihan = input("\nMasukkan ID Rute Yang Ingin Dihapus: ").strip()
+        for kota, daftar in data_perjalanan.items():
+            print(f"\nKota: {kota}")
+            if len(daftar) == 0:
+                print("   (Tidak ada rute)")
+            else:
+                for idx, r in enumerate(daftar):
+                    print(f"   {idx+1}. {r['rute']} | {r['jarak_tempuh']} km | Status: {r['status']}")
+
+        print("\nFormat input:")
+        print("   NamaKota-IndexRute")
+        print("Contoh: Balikpapan-1")
+
+        pilihan = input("\nMasukkan Rute Yang Ingin Dihapus: ").strip()
+
+        if "-" not in pilihan:
+            print("\nFormat salah! Contoh: Balikpapan-1")
+            input("Tekan Enter untuk ulangi...")
+            continue
+
+        kota, idx = pilihan.split("-")
+
+        kota = kota.strip()
+
+        if kota not in data_perjalanan:
+            print("\nKota tidak ditemukan!")
+            input("Tekan Enter untuk ulangi...")
+            continue
 
         try:
-            pilihan = int(pilihan)
-            pilih_rute = next((i for i in rute if int(i["id"]) == pilihan), None)
+            idx = int(idx) - 1
+        except:
+            print("\nIndex rute harus angka!")
+            input("Tekan Enter untuk ulangi...")
+            continue
 
-            if pilih_rute is None:
-                print("\nID tidak ditemukan!")
-                input("Tekan Enter untuk ulangi...")
-                clear()
-                continue
+        daftar_rute = data_perjalanan[kota]
 
-            else:
-                while True:
-                    konfirmasi = input(
-                        f"Apakah Anda Yakin Ingin Menghapus Rute Dari {pilih_rute['dari']} Ke {pilih_rute['ke']}? (Y/N): "
-                    ).strip().lower()
+        if idx < 0 or idx >= len(daftar_rute):
+            print("\nIndex rute tidak valid!")
+            input("Tekan Enter untuk ulangi...")
+            continue
 
-                    if konfirmasi == "y":
-                        index = rute.index(pilih_rute)
-                        rute.pop(index)
+        rute_dihapus = daftar_rute[idx]
+        nama_rute = rute_dihapus["rute"]
 
-                        with open("file_data/data_perjalanan.json", "w") as file:
-                            json.dump(data, file, indent=4)
+        konfirmasi = input(
+            f"Yakin ingin menghapus rute '{nama_rute}'? (Y/N): "
+        ).strip().lower()
 
-                        print("Rute Berhasil Dihapus!!")
-                        input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Rute...")
-                        detik3()
-                        clear()
-                        return
-
-                    elif konfirmasi == "n":
-                        print("Rute Tidak Jadi Dihapus...")
-                        input("\nTekan Enter Untuk Kembali Ke Menu Mengelola Rute...")
-                        detik3()
-                        clear()
-                        return
-
-                    else:
-                        print("\nMasukkan pilihan Y atau N!")
-                        input("Tekan Enter Untuk Menginput Ulang...")
-                        clear()
-                        continue
-
-        except ValueError:
-            print("\nInput Tidak Valid!! ID Harus Berupa Angka!!")
-            input("Tekan Enter Untuk Menginput Ulang...")
+        if konfirmasi == "n":
+            print("Penghapusan dibatalkan...")
             detik3()
             clear()
-            continue    
+            return
+
+        elif konfirmasi != "y":
+            print("Input tidak valid, masukkan Y/N!")
+            input("Tekan Enter...")
+            continue
+
+        daftar_rute.pop(idx)
+
+        review_list[:] = [
+            r for r in review_list
+            if r["Nama Perjalanan"] != nama_rute
+        ]
+
+        with open("file_data/data_perjalanan.json", "w") as f:
+            json.dump(data_perjalanan, f, indent=4)
+
+        with open("file_data/data_laporan.json", "w") as f:
+            json.dump(data_laporan, f, indent=4)
+
+        print(f"\nRute '{nama_rute}' BERHASIL dihapus!")
+        print("Semua review yang terkait rute tersebut juga telah dihapus.")
+        input("Tekan Enter untuk kembali...")
+        clear()
+        return
    
 def melihat_dan_menghapus_review_pengguna(konfirmasi_awal=False):
     data = baca_data_laporan()
@@ -307,7 +341,6 @@ def melihat_dan_menghapus_review_pengguna(konfirmasi_awal=False):
             clear()
             continue
    
-    
 def melihat_akun_pengguna(konfirmasi_awal = False):
     data = baca_data_akun()
     akun = data["member"]

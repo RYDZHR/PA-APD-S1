@@ -2,26 +2,5 @@
     "pesan_admin": [],
     "laporan_akun": [],
     "laporan_rute": [],
-    "review_rute": [
-        {
-            "Nama": "test",
-            "Nama Perjalanan": "Balikpapan-Samarinda",
-            "Destinasi": "kemana aja",
-            "Tanggal": "29/2/2004",
-            "Durasi": "3 hari",
-            "Budget": "3000000",
-            "Cerita": "wow",
-            "Rating": "5"
-        },
-        {
-            "Nama": "v",
-            "Nama Perjalanan": "Balikpapan-Samarinda",
-            "Destinasi": "seru banget",
-            "Tanggal": "21/05/2024",
-            "Durasi": "3 hari",
-            "Budget": "4005000",
-            "Cerita": "wow",
-            "Rating": "5"
-        }
-    ]
+    "review_rute": []
 }

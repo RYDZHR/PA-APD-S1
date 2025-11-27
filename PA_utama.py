@@ -41,10 +41,9 @@ while True:
                         elif jawab_pil1["menu_pil1"][0] == "2":
                             bersih()
                             melihat_rute_perjalanan()
-                            break
                         elif jawab_pil1["menu_pil1"][0] == "3":
-                            # NANTI AKAN DI LANJUT LAGI 
-                            pass
+                            bersih()
+                            menghapus_rute_perjalanan()
                         elif jawab_pil1["menu_pil1"][0] == "4":
                             bersih()
                             break
