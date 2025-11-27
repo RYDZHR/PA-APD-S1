@@ -103,8 +103,8 @@ while True:
                     break
                 
     elif jawab["list_login"] == "Registrasi":
-        registrasi()  
         bersih()
+        registrasi()
     elif jawab["list_login"] == "Keluar":
         bersih()
         print("Terima kasih telah menggunakan aplikasi ini. Sampai jumpa!")
